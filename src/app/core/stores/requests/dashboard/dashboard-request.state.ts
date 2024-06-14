@@ -62,11 +62,11 @@ export class DashboardRequestState {
     }
 
     @Action(ChangePeriod1)
-    ChangePeriod1(ctx: StateContext<DashboardRequestModel>, action: ChangePeriod1) {
+    async ChangePeriod1(ctx: StateContext<DashboardRequestModel>, action: ChangePeriod1) {
         let state = ctx.getState();
         
         const startTimeISO = new Date(action.startTime).toISOString().split('.')[0];
-        const endTimeISO = new Date(action.endTime).toISOString().split('.')[0];
+        const endTimeISO = await new Date(action.endTime).toISOString().split('.')[0];
 
         action.requestName[0].forEach((item) => {
             const itemName = item.name.split('_')[0];
@@ -132,41 +132,45 @@ export class DashboardRequestState {
         });
     }
 
-    static getRequestHistorianWithName(chartName: any[],period) {
+    static  getRequestHistorianWithName(chartName: any[],period) {
         return createSelector([DashboardRequestState], (state: DashboardRequestModel) => {
             const stateHis = state.Historian;
             let reqHis: DashboardReqHistorian[] = []
             chartName[0].forEach((item) => {
-                let request = stateHis.find(d => d.Name.split('_')[0] == item.name.split('_')[0]);
-                if (item.period == period.display && period.display == 't') {
-                    reqHis.push(request);
-                }
-                if (item.period == period.display && period.display == '7d') {
-                     
-                    // request.Name = request.Name.split('_')[0]+'_DAY'
-                }
-                if (item.period == period.display && period.display == '30d') {
-                     
-                    // request.Name = request.Name.split('_')[0]+'_DAY'
-                    reqHis.push(request);
-                }
-                if (item.period == period.display && period.display == '3m') {
-                     
-                    // request.Name = request.Name.split('_')[0]+'_DAY'
-                    reqHis.push(request);
-                }
-                if (item.period == period.display && period.display == '12m') {
-                     
-                    // request.Name = request.Name.split('_')[0]+'_MONTH'
-                    reqHis.push(request);
-                }
+                let request = stateHis.find(d => d.Name.split('.')[0] == item.name.split('.')[0]);
                 if (request != null|| undefined) {
+                   if (period.name === 't' && item.period === 't' && item.name.split('_')[1] === 'HOUR') {
+                        request.Name = item.name
+                        request.Options.Time = ''
+                         reqHis.push(request)
+                    }if (period.name === '7d' && item.period === '7d' && item.name.split('_')[1] === 'DAY') {
+                        request.Name = item.name
+                        request.Options.Time = ''
+                         reqHis.push(request)
+                    }if (period.name === '30d' && item.period === '30d' && item.name.split('_')[1] === 'DAY') {
+                        request.Name = item.name
+                        //  reqHis.push(request)
+                    }if (period.name === '3m' && item.period === '3m' && item.name.split('_')[1] === 'DAY') {
+                        request.Name = item.name
+                        //  reqHis.push(request)
+                    }if (period.name === '12m' && item.period === '12m' && item.name.split('_')[1] === 'MONTH') {
+                        request.Name = item.name
+                        //  reqHis.push(request)
+                    }else if (item !== null || undefined) {
+                        // request.Name = item.name
                     reqHis.push(request)
+                    }
+                    
                 }
                 
             });
             if (reqHis != null|| undefined) {
-                return reqHis;
+                const uniqueHis = reqHis.filter((value, index ,self) =>
+                    index === self.findIndex((t) =>(
+                        t.Name === value.Name && JSON.stringify(t.Options) === JSON.stringify(value.Options)
+                    ))
+                )
+                return uniqueHis;
             }
         });
     }

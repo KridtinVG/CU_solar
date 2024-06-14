@@ -35,7 +35,10 @@
                 <div class="enviCard w-100">
                     <app-cu-container>
                         <ng-template #gradient>
-                           <app-envi-consumption class="">
+                           <app-envi-consumption class=""
+                           [irr]="data?.singleValue['weather_irr']?.dataRecords[0]?.Value | myNumber : '1.0-0'"
+                           
+                           >
                            </app-envi-consumption>
                         </ng-template>
                     </app-cu-container>

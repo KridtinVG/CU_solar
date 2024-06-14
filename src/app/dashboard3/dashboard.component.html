@@ -5,7 +5,7 @@
         <div class="zoneCard " id="card2" [style.top.%]="35" [style.left.%]="30">
           <app-tooltip-vertical
           [title]="'Bx.'"
-          [titleText]="siteName.id"
+          [titleText]="siteName.name"
           [imgSrc]="'assets/images/building/dashboard/'+siteName.id+'.png'" 
           [g1Title]="'Energy'"
           [g1Value]="data?.singleValue['energy_value'].dataRecords[0]?.Value || '---'"
@@ -30,7 +30,7 @@
         <div class="btn-box">
           <button mat-mini-fab class="btn-respons" (click)="openBreaker()">
             <mat-icon class="icon-break">warning</mat-icon>
-          <div>{{siteName.id}} Breaker</div>
+          <div>{{siteName.name}} Breaker</div>
         </button>
         </div>
       </div>

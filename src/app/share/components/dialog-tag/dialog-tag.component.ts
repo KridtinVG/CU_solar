@@ -21,6 +21,17 @@ export class DialogTagComponent implements OnInit {
     
   }
 
+  getUnique(d){
+    const uniqueName = new Set();
+    return d.filter(d=> {
+      if (uniqueName.has(d.Name)) {
+        return false;
+      } else {
+        uniqueName.add(d.Name)
+        return true;
+      }
+    })
+  }
 
   selectOnceGroup(d: TagGrouping , a: AliasItem) {
     a.active = !a.active;

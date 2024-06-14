@@ -81,6 +81,9 @@ export class HttpService {
     getConfig2(path: string): Promise<DashboardConfigs> {
         return this.httpClient.get<DashboardConfigs>(path).toPromise();
     }
+    getConfig3(path: string): Promise<DashboardConfigs> {
+        return this.httpClient.get<DashboardConfigs>(path).toPromise();
+    }
     
 
     getConfigFile(path: string): Promise<any> {

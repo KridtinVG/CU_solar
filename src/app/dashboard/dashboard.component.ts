@@ -121,6 +121,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.siteName = JSON.parse(building);
     //console.log(JSON.parse(building))
     this.init02();
+    this.periodSelected = {name: 't',display:'t'}
   }
 
   ngAfterViewInit() {
@@ -138,9 +139,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   
   getPeakTime(sec: number) {
     const time = new Date();
-    const timeISO = time.toISOString().split('.')[0];
     time.setHours(0, 0, 0, 0);
     time.setSeconds(sec);
+    const timeISO = time.toISOString().split('.')[0];
     const timeStr = this.datePipe.transform(timeISO, 'HH:mm');
     this.cd.markForCheck();
     return timeStr;
@@ -177,7 +178,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loadSingleValue();
     this.loadMultipleValues();
     this.initloadInverterValues();
-    //console.log(this.data);
     this.startTimer(this.appLoadService.Config.Timer * 60000);
   }
 
@@ -421,29 +421,29 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // emit event from view (period component)
   async selectPeriod(period: Period, chartName: string) {
-    //console.log("Chart: "+chartName+"\nStart :"+period.name);
+    console.log("Chart: "+chartName+"\nStart :"+period.name);
     await this.store.dispatch(new ChangePeriodName(period.name, chartName)).toPromise();
-    const _period = this.dateTimeService.parseDate(period.name);
-    const tagChart: any[] = this.store.selectSnapshot(DashboardConfigsState.getConfigwithChartName(chartName));
+    const _period = await this.dateTimeService.parseDate(period.name);
+    const tagChart: any[] = await this.store.selectSnapshot(DashboardConfigsState.getConfigwithChartName(chartName));
     await this.store.dispatch(new ChangePeriod1(tagChart, _period.startTime, _period.endTime)).toPromise();
 
-    const req: DashboardReqHistorian[] = this.store.selectSnapshot(DashboardRequestState.getRequestHistorianWithName(tagChart, period));
+    const req: DashboardReqHistorian[] = await this.store.selectSnapshot(DashboardRequestState.getRequestHistorianWithName(tagChart, period));
     const res: DashboardResHistorian[] = await this.httpService.getPlotData(req);
     // console.log(req);
     // console.log(res);
     await this.store.dispatch(new ChangeLastValues1(tagChart, res)).toPromise();
-    const charts = this.chartConfigs.find(d => d.name == chartName);
+    const charts = await this.chartConfigs.find(d => d.name == chartName);
     const type = charts.type;
     let data: MultipleValue = {};
     if (type === "Raw") {
-      data = this.dashboardLastValuesService.getRawGroupDataWithName(chartName, period.name, this.chartConfigs);
+      data = await this.dashboardLastValuesService.getRawGroupDataWithName(chartName, period.name, this.chartConfigs);
     }
     else if (type === "Plot") {
-      data = this.dashboardLastValuesService.getPlotGroupDataWithName(chartName, period.name, this.chartConfigs);
+      data = await this.dashboardLastValuesService.getPlotGroupDataWithName(chartName, period.name, this.chartConfigs);
     }
     if (data && data[chartName] && data[chartName].data.length > 0) {
       //console.log(data);
-      this.chartOptions[chartName] = this.dashboardChartService.getChartOptions(chartName, data[chartName]);
+      this.chartOptions[chartName] = await this.dashboardChartService.getChartOptions(chartName, data[chartName]);
     }
 
     this.cd.markForCheck();

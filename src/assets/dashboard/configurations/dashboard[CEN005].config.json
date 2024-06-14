@@ -38,7 +38,7 @@
 		},
 		{
 			"Title": "energy_yesterday",
-			"Name": ""
+			"Name": "CALC03.WH_YEAR"
 		},
 		{
 			"Title": "energy_mtd",
@@ -113,6 +113,16 @@
 		{
 			"Name": "CALC03.WH_HOUR",
 			"Title": "X5",
+			"Options" : {
+				"Interval": 60,
+				"Time" :"t",
+				"StartTime" : "2021-06-24T00:00:00",
+				"EndTime" : "2023-12-24T23:59:59"
+			}
+		},
+		{
+			"Name": "CALC03.PR_HOUR",
+			"Title": "X6",
 			"Options" : {
 				"Interval": 60,
 				"Time" :"t",

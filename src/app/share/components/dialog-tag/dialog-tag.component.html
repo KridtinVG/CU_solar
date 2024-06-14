@@ -49,13 +49,13 @@
                 <div class="col-6 border-right pd-r-5 bd">
                   <p class="card-text group-name half" (click)="selectAllGroup(d)"
                     [ngClass]="{'active': getActiveAllGroup(d)}">ALL</p>
-                  <p class="card-text group-name half" *ngFor="let g of d.Groups | orderBy: 'Name'" [ngClass]="{'active': g.active }"
+                  <p class="card-text group-name half" *ngFor="let g of getUnique(d.Groups) | orderBy: 'Name'" [ngClass]="{'active': g.active }"
                     (click)="selectGroup(d, g)">{{g.Name}}</p>
                 </div>
                 <div class="col-6 pd-l-5 bd">
                   <p class="card-text group-name half" (click)="selectAllAlias(d)"
                     [ngClass]="{'active': getActiveAllAlias(d)}">ALL</p>
-                  <p class="card-text group-name half" *ngFor="let a of d.Aliases | orderBy: 'Name'" [ngClass]="{'active': a.active }"
+                  <p class="card-text group-name half" *ngFor="let a of getUnique(d.Aliases) | orderBy: 'Name'" [ngClass]="{'active': a.active }"
                     (click)="selectAlias(d, a)">{{a.Name}}</p>
                 </div>
               </div>

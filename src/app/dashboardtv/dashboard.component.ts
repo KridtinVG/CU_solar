@@ -156,11 +156,13 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   async getConfig() {
     //this.siteList = await this.httpService.getConfig('assets/main/location.json');
     this.buildingList = await this.httpService.getNavConfig('assets/main/BuildingList.json');
-    const dashboardConfigs: DashboardConfigs = await this.httpService.getConfig2('assets/dashboard/configurations/dashboard[CEN091].config.json');
+    const dashboardConfigs: DashboardConfigs = await this.httpService.getConfig3('assets/dashboard/configurations/dashboard[CEN091].config.json');
+    this.chartConfigs = [].concat(dashboardConfigs.chartConfig);
+    this.store.dispatch(new SetDashboardConfigs(dashboardConfigs));
     
     this.dataSource = await new MatTableDataSource(this.getTabel());
     this.dataSource.paginator = this.paginator;
-    // console.log(this.buildingList.building);
+    return dashboardConfigs;
   }
 
   isChange(){

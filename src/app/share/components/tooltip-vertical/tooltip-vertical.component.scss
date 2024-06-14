@@ -44,7 +44,7 @@
 .titleBox{
     color: rgb(63, 63, 63);
     font-weight:600;
-    font-size: 18px;
+    font-size: 16px;
     column-gap: 5px;
     
 }
@@ -127,7 +127,7 @@
     .tooltip-hoz{
         position: relative;
         width: 271px;
-        height: 111px;
+        height: 130px;
         clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 55% 80%, 50% 100%, 45% 80%, 0 80%);
         background-color: #F0F0F0;
         z-index: 5;

@@ -48,4 +48,11 @@ export class TooltipVerticalComponent implements OnInit, OnChanges  {
   }
   
 
+  trimText(name){
+    if(name.length > 16){
+      return name.substring(0,12) + '...';
+    } else {
+      return name
+    }
+  }
 }

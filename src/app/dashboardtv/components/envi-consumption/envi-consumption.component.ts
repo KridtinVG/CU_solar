@@ -8,6 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, O
 })
 export class EnviConsumptionComponent implements OnInit, OnChanges {
 
+  @Input() irr?: string;
+
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {

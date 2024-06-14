@@ -191,7 +191,7 @@ export class NavbarComponent implements AfterViewInit, OnInit {
     this.filteredBuildingList = this.buildingList.building.filter((item,index) => {
      if(item.zone === selectedZone){
        this.tagShowList.push(index);
-     } 
+     }
     }) ;
   }
 
