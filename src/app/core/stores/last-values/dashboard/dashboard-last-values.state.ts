@@ -16,7 +16,7 @@ export class ChangeLastValues {
 
 export class ChangeLastValues1 {
     static readonly type = '[DashboardLastValues] ChangeLastValues';
-    constructor(public tags: any[], public values: DashboardResHistorian[]) { }
+    constructor(public tags: any[], public values: DashboardResHistorian[], public period : string) { }
 }
 
 export class AddValues {
@@ -58,16 +58,19 @@ export class DashboardLastValuesState {
     }
 
     @Action(ChangeLastValues1)
-    changeLastValues1(ctx: StateContext<DashboardLastValuesModel[]>, action: ChangeLastValues1) {
+    changeLastValues1(ctx: StateContext<DashboardLastValuesModel[]>, action: ChangeLastValues1,period:string) {
         let state = ctx.getState();
         action.tags[0].forEach((item) => {
-            let lastValue = state.find(d => d.Name == item.name && d.Mode == "Historian");
+            if (state != null && action.values != null) {
+                let lastValue = state.find(d => d.Name == item.name && d.Mode == "Historian");
             let res = action.values.find(d => d.Name == item.name);
+            console.log(period)
+         
             //console.log(lastValue);
             //console.log(res);
-            if(lastValue != null){
+            if(lastValue != null && res != null && res.records !=null){
                 lastValue.DataRecord = [...res.records];
-            }
+            }}
         });
         //console.log(state);
         //ctx.setState(state);

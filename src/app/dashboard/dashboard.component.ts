@@ -137,14 +137,18 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   
-  getPeakTime(sec: number) {
-    const time = new Date();
+  getPeakTime(sec) {
+    if (sec != null) {
+      const time = new Date();
     time.setHours(0, 0, 0, 0);
-    time.setSeconds(sec);
+    const settimeNumber = parseFloat(sec);
+    time.setSeconds(settimeNumber*60*60); //cals to millisecond
     const timeISO = time.toISOString().split('.')[0];
     const timeStr = this.datePipe.transform(timeISO, 'HH:mm');
     this.cd.markForCheck();
     return timeStr;
+    }
+    
   }
 
   configs01: DashboardConfigsRealtime[];
@@ -421,7 +425,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // emit event from view (period component)
   async selectPeriod(period: Period, chartName: string) {
-    console.log("Chart: "+chartName+"\nStart :"+period.name);
+    // console.log("Chart: "+chartName+"\nStart :"+period.name);
     await this.store.dispatch(new ChangePeriodName(period.name, chartName)).toPromise();
     const _period = await this.dateTimeService.parseDate(period.name);
     const tagChart: any[] = await this.store.selectSnapshot(DashboardConfigsState.getConfigwithChartName(chartName));
@@ -431,7 +435,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     const res: DashboardResHistorian[] = await this.httpService.getPlotData(req);
     // console.log(req);
     // console.log(res);
-    await this.store.dispatch(new ChangeLastValues1(tagChart, res)).toPromise();
+    await this.store.dispatch(new ChangeLastValues1(tagChart, res,period.name)).toPromise();
     const charts = await this.chartConfigs.find(d => d.name == chartName);
     const type = charts.type;
     let data: MultipleValue = {};

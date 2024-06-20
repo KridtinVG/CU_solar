@@ -115,11 +115,22 @@
 			"Title": "X5",
 			"Options" : {
 				"Interval": 60,
+				"Time" :"",
+				"StartTime" : "2021-06-24T00:00:00",
+				"EndTime" : "2023-12-24T23:59:59"
+			}
+		},
+		{
+			"Name": "CALC06.WH_DAY",
+			"Title": "X7",
+			"Options" : {
+				"Interval": 60,
 				"Time" :"t",
 				"StartTime" : "2021-06-24T00:00:00",
 				"EndTime" : "2023-12-24T23:59:59"
 			}
-		},{
+		},
+		{
 			"Name": "CALC06.PR_HOUR",
 			"Title": "X6",
 			"Options" : {
@@ -208,7 +219,7 @@
 				},
 				{
 					"name": "CALC06.WH_DAY",
-					"title": "Energy",
+					"title": "",
 					"period": "7d",
 					"options": {
 						"chartOptions": {
@@ -219,32 +230,8 @@
 					}
 				},
 				{
-					"name": "CALC06.WH_DAY",
-					"title": "Energy",
-					"period": "30d",
-					"options": {
-						"chartOptions": {
-							"yAxis": 0,
-							"type": "column",
-							"color": "#3DB1FC"
-						}
-					}
-				},
-				{
-					"name": "CALC06.WH_DAY",
-					"title": "Energy",
-					"period": "3m",
-					"options": {
-						"chartOptions": {
-							"yAxis": 0,
-							"type": "column",
-							"color": "#3DB1FC"
-						}
-					}
-				},
-				{
 					"name": "CALC06.WH_MONTH",
-					"title": "Energy",
+					"title": "",
 					"period": "12m",
 					"options": {
 						"chartOptions": {
@@ -292,30 +279,6 @@
 					"name": "CALC06.PR_DAY",
 					"title": "Performance",
 					"period": "7d",
-					"options": {
-						"chartOptions": {
-							"yAxis": 0,
-							"type": "column",
-							"color": "#3DB1FC"
-						}
-					}
-				},
-				{
-					"name": "CALC06.PR_DAY",
-					"title": "Performance",
-					"period": "30d",
-					"options": {
-						"chartOptions": {
-							"yAxis": 0,
-							"type": "column",
-							"color": "#3DB1FC"
-						}
-					}
-				},
-				{
-					"name": "CALC06.PR_DAY",
-					"title": "Performance",
-					"period": "3m",
 					"options": {
 						"chartOptions": {
 							"yAxis": 0,

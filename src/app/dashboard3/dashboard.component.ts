@@ -497,7 +497,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     const req: DashboardReqHistorian[] = this.store.selectSnapshot(DashboardRequestState.getRequestHistorianWithName(tagChart, _period));
     const res: DashboardResHistorian[] = await this.httpService.getHistorian(req);
     ////console.log(res);
-    await this.store.dispatch(new ChangeLastValues1(tagChart, res)).toPromise();
+    await this.store.dispatch(new ChangeLastValues1(tagChart, res,period.name)).toPromise();
     const charts = this.chartConfigs.find(d => d.name == chartName);
     const type = charts.type;
     let data: MultipleValue = {};

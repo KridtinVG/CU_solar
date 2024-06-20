@@ -138,25 +138,25 @@ export class DashboardRequestState {
             let reqHis: DashboardReqHistorian[] = []
             chartName[0].forEach((item) => {
                 let request = stateHis.find(d => d.Name.split('.')[0] == item.name.split('.')[0]);
-                if (request != null|| undefined) {
-                   if (period.name === 't' && item.period === 't' && item.name.split('_')[1] === 'HOUR') {
-                        request.Name = item.name
-                        request.Options.Time = ''
+                if (request != null) {
+                   if (period.name === 't' && period.name === item.period && item.name.split('_')[1] === 'HOUR') {
+                        request.Name = item.name    
+                        // request.Options.Time = ''
                          reqHis.push(request)
-                    }if (period.name === '7d' && item.period === '7d' && item.name.split('_')[1] === 'DAY') {
+                    }if (period.name ===  item.period && item.name.split('_')[1] === 'DAY') {
                         request.Name = item.name
-                        request.Options.Time = ''
+                        // request.Options.Time = ''
                          reqHis.push(request)
                     }if (period.name === '30d' && item.period === '30d' && item.name.split('_')[1] === 'DAY') {
                         request.Name = item.name
-                        //  reqHis.push(request)
+                         reqHis.push(request)
                     }if (period.name === '3m' && item.period === '3m' && item.name.split('_')[1] === 'DAY') {
                         request.Name = item.name
-                        //  reqHis.push(request)
+                         reqHis.push(request)
                     }if (period.name === '12m' && item.period === '12m' && item.name.split('_')[1] === 'MONTH') {
                         request.Name = item.name
-                        //  reqHis.push(request)
-                    }else if (item !== null || undefined) {
+                         reqHis.push(request)
+                    }else if (item !== null && item.period == null && item.period == null) {
                         // request.Name = item.name
                     reqHis.push(request)
                     }

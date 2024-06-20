@@ -15,8 +15,8 @@
       <a class="box site-box" style="display: flex; flex-direction: column; justify-content: center; row-gap: 5px;">
         <p>LOCATION</p>
         <div class="dropDown">
-          <mat-select disableOptionCentering [placeholder]="buildingList.building[0].name" panelClass="myPanelClass"
-            class="mySelectClass" style="color: white;" *ngIf="buildingList">
+          <mat-select *ngIf="buildingList != null && buildingList.building != null" disableOptionCentering [placeholder]="buildingList.building[0].name" panelClass="myPanelClass"
+            class="mySelectClass" style="color: white;">
             <!-- <mat-option *ngFor="let item of buildingList.building"  [value]="item" (click)="selectSite(item)">
               {{item.name}} 
             </mat-option> -->
@@ -223,12 +223,13 @@
                 <option *ngFor="let zone of [1, 2, 3, 4, 5, 6, 7]" [value]="zone">ZONE _ {{zone}}</option>
               </select></div>
             </label>
+            <ng-container *ngIf="buildingList != null && buildingList.building != null">
               <ng-container *ngFor="let item of buildingList.building; let i = index">
-                <mat-option *ngIf="tagShowList.includes(i)" [value]="item"
-                  (click)="selectSite(item)" class="custom_select">
+                <mat-option *ngIf="tagShowList.includes(i)" [value]="item" (click)="selectSite(item)" class="custom_select">
                   {{item.name}}
                 </mat-option>
               </ng-container>
+            </ng-container>
           <!-- <div class="list1" style="overflow-y: auto; height: 300px; width: 300px; background-color: #fafdfd;">
             <mat-option *ngFor="let item of buildingList.building">
               <mat-option

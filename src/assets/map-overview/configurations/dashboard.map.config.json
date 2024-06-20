@@ -74,15 +74,15 @@
 		},
 		{
 			"Title": "irr_value",
-			"Name": ""
+			"Name": "SLOGGER06.IRR_TODAY"
 		},
 		{
 			"Title": "pv_value",
-			"Name": ""
+			"Name": "SLOGGER06.PVTEMP"
 		},
 		{
 			"Title": "amb_value",
-			"Name": ""
+			"Name": "SLOGGER06.AMBTEMP"
 		},
 		{
 			"Title": "today_energy",
@@ -95,6 +95,10 @@
 		{
 			"Title": "total_power",
 			"Name": "CALC.ALLZONE.W"
+		},
+		{
+			"Title": "weather_co2",
+			"Name": "CALC06.CO2_TODAY"
 		}
 		
 	],

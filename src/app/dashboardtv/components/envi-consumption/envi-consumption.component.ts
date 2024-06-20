@@ -9,6 +9,9 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, O
 export class EnviConsumptionComponent implements OnInit, OnChanges {
 
   @Input() irr?: string;
+  @Input() amb?: string;
+  @Input() pv?: string;
+  @Input() cod?: string;
 
   constructor() { }
 
